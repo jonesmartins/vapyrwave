@@ -15,17 +15,17 @@ This bot turns your cool sentences into Ｖ Ａ Ｐ Ｏ Ｒ Ｗ Ａ Ｖ Ｅ sent
 
 ### Instructions:
 
-  - The script has three different options: `upper`, `lower` or `capital`. 
+  - The script has three different options: `upper`, `lower` or `title`. 
   - Write `py vaporwave.py <option> <sentence between quotes>`.
   - If you don't input `<option>` and `<sentence between quotes>` the script will run an input loop. 
   - It pastes the result on your clipboard so you can use it wherever you want.
   
 ### Example:
 ```
-$ py vaporwave.py lower "It works!"
+$ py vaporwave.py title "it works!"
 $ "Result in your clipboard."
 
-Clipboard: ｉ ｔ  ｗ ｏ ｒ ｋ ｓ ！ 
+Clipboard: Ｉ ｔ   Ｗ ｏ ｒ ｋ ｓ ！  
 ```
 
 
