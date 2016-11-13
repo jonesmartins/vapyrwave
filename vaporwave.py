@@ -30,13 +30,14 @@ def vaporwave(sentence):
     print("Result in your clipboard.")
 
 
-def parse_cmd(text):
-    if text[:6] == "upper ":
+def parse_command(text):
+    command = text[:6]
+    if command == "upper ":
         vaporwave(text[6:].upper())
-    elif text[:6] == "lower ":
+    elif command == "lower ":
         vaporwave(text[6:].lower())
-    elif text[:8] == "capital ":
-        vaporwave(text[8:].capitalize())
+    elif command == "title ":
+        vaporwave(text[6:].title())
     elif text == "":
         print("Exiting.")
         sys.exit() #breaks while loop
@@ -49,10 +50,10 @@ def main(argv):
     if length == 1:
         while True:
             sentence = input("Sentence: ")
-            parse_cmd(sentence)
+            parse_command(sentence)
     elif length == 3:
         sentence = "{} {}".format(sys.argv[1], sys.argv[2])
-        parse_cmd(sentence)
+        parse_command(sentence)
     else:
         print("Command Error.")
 
