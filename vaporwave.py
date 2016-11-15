@@ -1,7 +1,7 @@
 import pyperclip
 import sys
 
-def vaporwave(sentence):
+def transform_vaporwave(sentence):
     new_sentence = ""
     for character in sentence:
         ord_char = ord(character)
