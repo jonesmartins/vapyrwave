@@ -6,42 +6,41 @@ def transform_vaporwave(sentence):
     for character in sentence:
         ord_char = ord(character)
         if ord_char >= 33 and ord_char <= 127:
-            new_sentence += chr(ord_char + 65248) + " "
+            new_sentence += chr(ord_char + 65248) + " "    
         else:
             new_sentence += character + " "
-            
+
     pyperclip.copy(new_sentence)
     print("Result in your clipboard.")
 
-
-def parse_command(text):
-    command = text[:6]
-    string = text[6:]
+def parse_cmd(text):
+    command = text[:6].lower()  # just in case
     if command == "upper ":
-        string = string.upper()
+        string = text[6:].upper()
     elif command == "lower ":
-        string = string.lower()
+        string = text[6:].lower()
     elif command == "title ":
-        string = string.title()
+        string = text[6:].title()
     elif text == "":
         print("Exiting.")
-        sys.exit() #breaks while loop
+        sys.exit()  # stops while loop
     else:
         print("Input Error.")
-        sys.exit() #stops program
+        sys.exit()  # stops program
         
-    transform_vaporwave(string) 
+    transform_vaporwave(string)
+    
 
 def main(argv):
-    length = len(argv)
-    if length == 1:
+    size_argv = len(argv)
+    if size_argv == 1:  # Only filename
         while True:
             sentence = input("Sentence: ")
-            parse_command(sentence)
-    elif length == 3:
-        sentence = "{} {}".format(sys.argv[1], sys.argv[2])
-        parse_command(sentence)
+            parse_cmd(sentence)
     else:
-        print("Command Error.")
+        sentence = " ".join(argv[1:])
+        parse_cmd(sentence)    
+    
 
 main(sys.argv)
+
