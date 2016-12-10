@@ -10,7 +10,7 @@ def transform_vaporwave(sentence):
         else:
             new_sentence += character + " "
 
-    pyperclip.copy(new_sentence)
+    pyperclip.copy(new_sentence[:len(new_sentence)-1])  # removes last empty space
     print("Result in your clipboard.")
 
 def parse_cmd(text):
