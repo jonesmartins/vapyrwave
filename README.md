@@ -10,14 +10,14 @@ This bot turns your cool sentences into Ｖ Ａ Ｐ Ｏ Ｒ Ｗ Ａ Ｖ Ｅ sent
 ### Installation
 
  - Clone or download the file.
- - Install Pyperclip with `py -m pip install pyperclip`
- - See instructions for more
+ - Install Pyperclip through Pip.
+ - See instructions for more.
 
 ### Instructions:
 
   - The script has three different options: `upper`, `lower` or `title`. 
-  - Write `py vaporwave.py <option> <sentence between quotes>`.
-  - If you don't input `<option>` and `<sentence between quotes>` the script will run an input loop. 
+  - Write `py vaporwave.py <option> <sentence between quotes>`. The quotes are also optional.
+  - If you don't input `<option>` and `<sentence>` the script will run an input loop. 
   - It pastes the result on your clipboard so you can use it wherever you want.
   
 ### Example:
