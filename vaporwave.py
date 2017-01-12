@@ -1,5 +1,4 @@
-import pyperclip
-import sys
+import sys, pyperclip
 
 def transform_vaporwave(sentence):
     new_sentence = ""
@@ -10,11 +9,11 @@ def transform_vaporwave(sentence):
         else:
             new_sentence += character + " "
 
-    pyperclip.copy(new_sentence[:len(new_sentence)-1])  # removes last empty space
+    pyperclip.copy(new_sentence)  # sends result to clipboard
     print("Result in your clipboard.")
 
 def parse_cmd(text):
-    command = text[:6].lower()  # just in case
+    command = text[:6].lower() 
     if command == "upper ":
         string = text[6:].upper()
     elif command == "lower ":
@@ -22,18 +21,16 @@ def parse_cmd(text):
     elif command == "title ":
         string = text[6:].title()
     elif text == "":
-        print("Exiting.")
-        sys.exit()  # stops while loop
+        sys.exit("Exiting.")  # stops while loop
     else:
-        print("Input Error.")
-        sys.exit()  # stops program
+        sys.exit("Input Error.")  # stops program
         
     transform_vaporwave(string)
     
 
 def main(argv):
     size_argv = len(argv)
-    if size_argv == 1:  # Only filename
+    if size_argv == 1:  # filename
         while True:
             sentence = input("Sentence: ")
             parse_cmd(sentence)
@@ -41,6 +38,6 @@ def main(argv):
         sentence = " ".join(argv[1:])
         parse_cmd(sentence)    
     
-
-main(sys.argv)
+if __name__ == '__main__':
+    main(sys.argv)
 
