@@ -29,8 +29,7 @@ def parse_cmd(text):
     
 
 def main(argv):
-    size_argv = len(argv)
-    if size_argv == 1:  # filename
+    if len(argv) == 1:  # only filename
         while True:
             sentence = input("Sentence: ")
             parse_cmd(sentence)
