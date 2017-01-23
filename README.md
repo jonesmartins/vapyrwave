@@ -7,7 +7,7 @@ Requires Pyperclip and Argparse
 ### Installation
 
  - Clone or download the file.
- - Install Pyperclip through Pip.
+ - Install Pyperclip and Argparse through Pip.
  - See instructions for more.
 
 ### Usage:
