@@ -2,10 +2,7 @@
 
 This bot turns your cool sentences into Ｖ Ａ Ｐ Ｏ Ｒ Ｗ Ａ Ｖ Ｅ sentences with spaced full width characters.
 
-### Tech
-
- - Python 3.4.3
- - Pyperclip lib
+Requires Pyperclip
 
 ### Installation
 
@@ -13,19 +10,36 @@ This bot turns your cool sentences into Ｖ Ａ Ｐ Ｏ Ｒ Ｗ Ａ Ｖ Ｅ sent
  - Install Pyperclip through Pip.
  - See instructions for more.
 
-### Instructions:
-
-  - The script has three different options: `upper`, `lower` or `title`. 
-  - Write `py vaporwave.py <option> <sentence between quotes>`. The quotes are also optional.
-  - If you don't input `<option>` and `<sentence>` the script will run an input loop. 
-  - It pastes the result on your clipboard so you can use it wherever you want.
+### Usage:
+```sh
+py vaporwave.py [-v] [sentence between quotes]
+``` 
+The optional -v flag verticalizes your sentence.
   
 ### Example:
-```
-$ py vaporwave.py title "it works!"
-$ "Result in your clipboard."
+```sh
+$ py vaporwave.py "it works!"
+$ Result in your clipboard.
 
-Clipboard: Ｉ ｔ   Ｗ ｏ ｒ ｋ ｓ ！  
+Clipboard: ｉ ｔ   ｗ ｏ ｒ ｋ ｓ ！
 ```
+And also:
+```sh
+$ py vaporwave.py "Verticalized!"
+$ Result in your clipboard.
 
+Clipboard: Ｖ ｅ ｒ ｔ ｉ ｃ ａ ｌ ｉ ｚ ｅ ｄ ！
+           ｅ
+           ｒ
+           ｔ
+           ｉ
+           ｃ
+           ａ
+           ｌ
+           ｉ
+           ｚ
+           ｅ
+           ｄ
+           ！
+```
 
