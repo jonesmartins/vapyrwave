@@ -2,7 +2,7 @@
 
 This bot turns your cool sentences into Ｖ Ａ Ｐ Ｏ Ｒ Ｗ Ａ Ｖ Ｅ sentences with spaced full width characters.
 
-Requires Pyperclip
+Requires Pyperclip and Argparse
 
 ### Installation
 
