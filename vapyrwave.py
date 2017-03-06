@@ -24,7 +24,7 @@ def transform_vaporwave(sentence):
     char_distance = ord('Ａ') - ord('A')  # 65248
     for character in sentence:
         ord_char = ord(character)
-        if 33 <= ord_char <= 127:
+        if ord('!') <= ord_char <= ord('~'):
             character = chr(ord_char + char_distance)
         new_sentence += character
     return new_sentence
