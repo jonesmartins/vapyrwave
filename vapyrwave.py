@@ -6,11 +6,9 @@ def read_argv(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument('sentence', help='Sentence to transform')
     parser.add_argument('-v', dest='vertical', action='store_true',
-                        help='Prints result in vertical manner')
-    parser.add_argument('-s', dest='spaced', action='store_true',
-                        help='Prints result with spaces amidst letters')
-    parser.add_argument('-d', dest='double', action='store_true',
-                        help='Makes big square of letters')
+                        help='Prints result in vertical manner')  
+    parser.add_argument('-s', dest='spaced', default=0, type=int,
+                        help='Prints result with N spaces amidst letters')
     return parser.parse_args(argv)
 
 
@@ -39,15 +37,15 @@ def make_vertical(sentence):
     return new_sentence.rstrip('\n')
 
 
-def make_horizontal(sentence):
+def make_horizontal(sentence, spaces):
     new_sentence = ''
     for letter in sentence:
-        new_sentence += '{} '.format(letter)
+        new_sentence += '{}{}'.format(letter, ' '*spaces)
     return new_sentence
 
 
-def make_both(sentence):
-    final_sentence = '{}\n'.format(make_horizontal(sentence))
+def make_both(sentence, spaces):
+    final_sentence = '{}\n'.format(make_horizontal(sentence, spaces))
     for pos in range(1, len(sentence)):
         final_sentence += '{}\n'.format(sentence[pos])
     return final_sentence.rstrip('\n')
@@ -56,21 +54,20 @@ def make_both(sentence):
 def send_to_clipboard(sentence):
     pyperclip.copy(sentence)
     print("Result in your clipboard.")
+
     
 def main(argv):
     cmd = read_argv(argv)
     cmd_dict = check_cmd(cmd)    
     sentence = transform_vaporwave(cmd_dict['sentence'])
-    if cmd_dict['vertical'] and cmd_dict['spaced'] and not cmd_dict['double']:
-        sentence = make_both(sentence)        
-    elif cmd_dict['vertical'] and not cmd_dict['double']:
+    if cmd_dict['vertical'] and cmd_dict['spaced']:
+        sentence = make_both(sentence, cmd_dict['spaced'])
+    elif cmd_dict['spaced']:
+        sentence = make_horizontal(sentence, cmd_dict['spaced'])
+    elif cmd_dict['vertical']:
         sentence = make_vertical(sentence)
-    elif cmd_dict['spaced'] and not cmd_dict['double']:
-        sentence = make_horizontal(sentence)
-    elif cmd_dict['double']:
-        sentence = make_double(sentence)
+    
     send_to_clipboard(sentence)
     
 if __name__ == '__main__':
     main(sys.argv[1:])
-
