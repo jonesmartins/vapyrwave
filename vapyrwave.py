@@ -1,6 +1,7 @@
-import pyperclip
-import argparse
 import sys
+
+import argparse
+import pyperclip
 
 
 def read_argv(argv):
@@ -13,13 +14,6 @@ def read_argv(argv):
     return parser.parse_args(argv)
 
 
-def check_cmd(cmd):
-    try:
-        return vars(cmd)
-    except TypeError:
-        return cmd
-
-
 def transform_vaporwave(sentence):
     new_sentence = ''
     char_distance = ord('Ａ') - ord('A')  # 65248
@@ -28,46 +22,44 @@ def transform_vaporwave(sentence):
         if ord('!') <= ord_char <= ord('~'):
             character = chr(ord_char + char_distance)
         new_sentence += character
+
     return new_sentence
 
 
 def make_vertical(sentence):
-    new_sentence = ''
-    for letter in sentence:
-        new_sentence += '{}\n'.format(letter)
+    new_sentence = '\n'.join([s for s in sentence])
     return new_sentence.rstrip('\n')
 
 
 def make_horizontal(sentence, spaces):
-    new_sentence = ''
-    for letter in sentence:
-        new_sentence += '{}{}'.format(letter, ' '*spaces)
+    spaces_str = ' ' * spaces
+    new_sentence = spaces_str.join([s for s in sentence])
     return new_sentence
 
 
 def make_both(sentence, spaces):
     final_sentence = '{}\n'.format(make_horizontal(sentence, spaces))
-    for pos in range(1, len(sentence)):
-        final_sentence += '{}\n'.format(sentence[pos])
+    final_sentence = '\n'.join(sentence[1:])
     return final_sentence.rstrip('\n')
 
 
 def send_to_clipboard(sentence):
     pyperclip.copy(sentence)
-    print("Result in your clipboard.")
+    print("Saved on your clipboard.")
 
     
 def main(argv):
-    cmd = read_argv(argv)
-    cmd_dict = check_cmd(cmd)    
-    sentence = transform_vaporwave(cmd_dict['sentence'])
-    if cmd_dict['vertical'] and cmd_dict['spaced'] is not None:
-        sentence = make_both(sentence, cmd_dict['spaced'])
-    elif cmd_dict['spaced'] is not None:
-        sentence = make_horizontal(sentence, cmd_dict['spaced'])
-    elif cmd_dict['vertical']:
+    cmd = vars(read_argv(argv))
+    sentence = transform_vaporwave(cmd['sentence'])
+    if cmd['vertical'] and cmd['spaced'] is not None:
+        sentence = make_both(sentence, cmd['spaced'])
+    elif cmd['spaced'] is not None:
+        sentence = make_horizontal(sentence, cmd['spaced'])
+    elif cmd['vertical']:
         sentence = make_vertical(sentence)
     
     send_to_clipboard(sentence)
+
+    
 if __name__ == '__main__':
     main(sys.argv[1:])
