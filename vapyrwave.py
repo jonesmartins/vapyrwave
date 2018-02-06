@@ -9,7 +9,7 @@ def read_argv(argv):
     parser.add_argument('sentence', help='Sentence to transform')
     parser.add_argument('-v', dest='vertical', action='store_true',
                         help='Prints result in vertical manner')
-    parser.add_argument('-s', dest='spaced', default=0, type=int,
+    parser.add_argument('-s', dest='spaced', default=1, type=int,
                         help='Prints result with spaces amidst letters')
     return parser.parse_args(argv)
 
@@ -39,8 +39,8 @@ def make_horizontal(sentence, spaces):
 
 def make_both(sentence, spaces):
     final_sentence = '{}\n'.format(make_horizontal(sentence, spaces))
-    final_sentence = '\n'.join(sentence[1:])
-    return final_sentence.rstrip('\n')
+    vertical = '\n'.join(sentence[1:])
+    return final_sentence + vertical
 
 
 def send_to_clipboard(sentence):
@@ -51,9 +51,9 @@ def send_to_clipboard(sentence):
 def main(argv):
     cmd = vars(read_argv(argv))
     sentence = transform_vaporwave(cmd['sentence'])
-    if cmd['vertical'] and cmd['spaced'] is not None:
+    if cmd['vertical'] and cmd['spaced']:
         sentence = make_both(sentence, cmd['spaced'])
-    elif cmd['spaced'] is not None:
+    elif cmd['spaced']:
         sentence = make_horizontal(sentence, cmd['spaced'])
     elif cmd['vertical']:
         sentence = make_vertical(sentence)
