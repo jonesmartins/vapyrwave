@@ -9,7 +9,7 @@ def read_argv(argv):
     parser.add_argument('sentence', help='Sentence to transform')
     parser.add_argument('-v', dest='vertical', action='store_true',
                         help='Prints result in vertical manner')
-    parser.add_argument('-s', dest='spaced', default=1, type=int,
+    parser.add_argument('-s', dest='spaced', default=0, type=int,
                         help='Prints result with spaces amidst letters')
     return parser.parse_args(argv)
 
