@@ -1,61 +1,94 @@
 # Vapyrwave
 
-This program turns your cool sentences into ＶＡＰＯＲＷＡＶＥ sentences with fullwidth characters.
+This program turns your cool sentences into even cooler ＶＡＰＯＲＷＡＶＥ sentences with [fullwidth characters](https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms).
 
-Requires Pyperclip and Argparse
+Requires `pyperclip` and `argparse`.
 
 ### Installation
 
- - Clone or download the file.
- - Install Pyperclip and Argparse through Pip.
- - See instructions for more.
+ - Download the `vapyrwave.py` or clone the project.
+ - Manually install `pyperclip` and `argparse` through `pip` or run `pip install -r requirements.txt` with this project's requirements file.
+ - You're set!
 
-### Usage:
+Notes from Pyperclip's documentation (2020-06-03):
+
+```
+Currently only handles plaintext.
+
+On Windows, no additional modules are needed.
+
+On Mac, this module makes use of the pbcopy and pbpaste commands, which should come with the os.
+
+On Linux, this module makes use of the xclip or xsel commands, which should come with the os. 
+
+Otherwise run “sudo apt-get install xclip” or “sudo apt-get install xsel” (Note: xsel does not always seem to work.)
+
+Otherwise on Linux, you will need the gtk or PyQt4 modules installed.
+```
+
+### Usage
+
 ```sh
-py vaporwave.py [-v] [-s SPACES] [sentence between quotes]
+python vapyrwave.py [-h] [-s SPACES | -v | -b [BOTH]] sentence
 ``` 
-The optional -v flag verticalizes your sentence.
-The optional -s flags adds N spaces between your characters
-  
-### Example:
-```sh
-$ py vaporwave.py "it works!" -s 1
-$ Result in your clipboard.
 
-Clipboard: ｉ ｔ   ｗ ｏ ｒ ｋ ｓ ！
+The optional -v/--vertical flag verticalizes your sentence.
+The optional -s/--spaces flag adds N spaces between characters.
+The optional -b/--both flag joins vertical and horizontal results and adds N spaces between characters.
+
+### Examples
+
+## No flags
+
+```sh
+$ py vapyrwave.py "No flags"
+>>> Ｎｏ ｆｌａｇｓ
+>>> Result saved to clipboard.
 ```
-And also:
-```sh
-$ py vaporwave.py "Verticalized!" -v
-$ Result in your clipboard.
 
-Clipboard: Ｖ
-           ｅ
-           ｒ
-           ｔ
-           ｉ
-           ｃ
-           ａ
-           ｌ
-           ｉ
-           ｚ
-           ｅ
-           ｄ
-           ！
+## With spaces
+
+```sh
+$ py vapyrwave.py "With spaces"
+>>> Ｗ ｉ ｔ ｈ   ｓ ｐ ａ ｃ ｅ ｓ
+>>> Result saved to clipboard.
 ```
-Or maybe:
-```sh
-$ py vaporwave.py "aesthetics!" -v -s 1
-$ Result in your clipboard.
 
-Clipboard: ａ ｅ ｓ ｔ ｈ ｅ ｔ ｉ ｃ ｓ 
-           ｅ
-           ｓ
-           ｔ
-           ｈ
-           ｅ
-           ｔ
-           ｉ
-           ｃ
-           ｓ
+## Verticalized
+
+```sh
+$ py vapyrwave.py "Verticalized" -v
+>>> Ｖ
+>>> ｅ
+>>> ｒ
+>>> ｔ
+>>> ｉ
+>>> ｃ
+>>> ａ
+>>> ｌ
+>>> ｉ
+>>> ｚ
+>>> ｅ
+>>> ｄ
+>>> Result saved to clipboard.
+```
+
+## Both
+
+```sh
+$ py vapyrwave.py "Why not both?" -b 1
+>>> Ｗ ｈ ｙ   ｎ ｏ ｔ   ｂ ｏ ｔ ｈ ？
+>>> ｈ
+>>> ｙ
+>>>  
+>>> ｎ
+>>> ｏ
+>>> ｔ
+>>>  
+>>> ｂ
+>>> ｏ
+>>> ｔ
+>>> ｈ
+>>> ？
+>>> Result saved to clipboard.
 ```
