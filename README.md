@@ -49,8 +49,8 @@ $ py vapyrwave.py "No flags"
 ## With spaces
 
 ```sh
-$ py vapyrwave.py "With spaces"
->>> Ｗ ｉ ｔ ｈ   ｓ ｐ ａ ｃ ｅ ｓ
+$ py vapyrwave.py "Spaced characters" -s  2
+>>> Ｓ  ｐ  ａ  ｃ  ｅ  ｄ     ｃ  ｈ  ａ  ｒ  ａ  ｃ  ｔ  ｅ  ｒ  ｓ
 >>> Result saved to clipboard.
 ```
 
