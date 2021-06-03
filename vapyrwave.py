@@ -6,11 +6,36 @@ import pyperclip
 
 def read_argv(argv):
     parser = argparse.ArgumentParser()
-    parser.add_argument('sentence', help='Sentence to transform')
-    parser.add_argument('-v', dest='vertical', action='store_true',
-                        help='Prints result in vertical manner')
-    parser.add_argument('-s', dest='spaced', default=0, type=int,
-                        help='Prints result with spaces amidst letters')
+    parser.add_argument(
+        'sentence',
+        help='Sentence to transform'
+    )
+
+    group = parser.add_mutually_exclusive_group()
+
+    group.add_argument(
+        '-s', '--spaces',
+        dest='spaces',
+        type=int,
+        help='Prints result with N spaces between characters'
+    )
+
+    group.add_argument(
+        '-v', '--vertical',
+        dest='vertical',
+        action='store_true',
+        help='Prints result vertically'
+    )
+
+    group.add_argument(
+        '-b', '--both',
+        dest='both',
+        const=0,
+        type=int,
+        nargs='?',
+        help='Prints result both vertically and horizontally with N spaces between characters'
+    )
+
     return parser.parse_args(argv)
 
 
@@ -27,39 +52,40 @@ def transform_vaporwave(sentence):
 
 
 def make_vertical(sentence):
-    new_sentence = '\n'.join([s for s in sentence])
+    new_sentence = '\n'.join(sentence)
     return new_sentence.rstrip('\n')
 
 
-def make_horizontal(sentence, spaces):
+def add_spaces(sentence, spaces):
     spaces_str = ' ' * spaces
-    new_sentence = spaces_str.join([s for s in sentence])
+    new_sentence = spaces_str.join(sentence)
     return new_sentence
 
 
 def make_both(sentence, spaces):
-    final_sentence = '{}\n'.format(make_horizontal(sentence, spaces))
+    horizontal = add_spaces(sentence, spaces) + '\n'
     vertical = '\n'.join(sentence[1:])
-    return final_sentence + vertical
+    return horizontal + vertical
 
 
-def send_to_clipboard(sentence):
-    pyperclip.copy(sentence)
-    print("Saved on your clipboard.")
-
-    
 def main(argv):
-    cmd = vars(read_argv(argv))
-    sentence = transform_vaporwave(cmd['sentence'])
-    if cmd['vertical'] and cmd['spaced']:
-        sentence = make_both(sentence, cmd['spaced'])
-    elif cmd['spaced']:
-        sentence = make_horizontal(sentence, cmd['spaced'])
-    elif cmd['vertical']:
-        sentence = make_vertical(sentence)
-    
-    send_to_clipboard(sentence)
+    cmd = read_argv(argv)
 
-    
+    fullwidth_sentence = transform_vaporwave(cmd.sentence)
+
+    if cmd.spaces is not None:
+        result = add_spaces(fullwidth_sentence, cmd.spaces)
+    elif cmd.vertical:
+        result = make_vertical(fullwidth_sentence)
+    elif cmd.both is not None:
+        result = make_both(fullwidth_sentence, cmd.both)
+    else:
+        result = fullwidth_sentence
+
+    print(result)
+    pyperclip.copy(result)
+    print('Result saved to clipboard.')
+
+
 if __name__ == '__main__':
     main(sys.argv[1:])
